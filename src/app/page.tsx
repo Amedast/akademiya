@@ -1,101 +1,119 @@
+"use client";
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
-export default function Home() {
+export default function GamesPage() {
+  const [hoveredImage, setHoveredImage] = useState<number | null>(null);
+
+  const handleHover = (index: number) => {
+    setHoveredImage(index);
+  };
+
+  const handleHoverOut = () => {
+    setHoveredImage(null);
+  };
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="lg:h-screen flex items-center mt-28 lg:-mt-20 w-full">
+      <div className="flex flex-wrap lg:flex-nowrap gap-10 lg:gap-0 items-center justify-center h-40 w-full">
+        <Link
+          href={"https://starrail.akademiya.app/"}
+          className="bg-[url('/games/hsr.webp')] bg-center bg-cover bg-no-repeat h-40 w-[100%] lg:w-[33%] lg:hover:w-[100%] transition-all duration-200 cursor-pointer rounded-md lg:rounded-r-none lg:rounded-l-md"
+          onMouseEnter={() => handleHover(0)}
+          onMouseLeave={handleHoverOut}
+        >
+          <div
+            className={`bg-background/70 h-full w-ful rounded-md lg:rounded-r-none lg:rounded-l-md`}
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <div
+              className={`flex h-full justify-end relative transition-opacity duration-200 ${
+                hoveredImage !== null && hoveredImage !== 0
+                  ? "opacity-0"
+                  : "opacity-100"
+              }`}
+            >
+              <div className="hidden lg:block lg:w-[40%] absolute bottom-0 left-0">
+                <Image
+                  src={"/games/kafka.webp"}
+                  alt="Star Rail Akademiya showcase image"
+                  width={600}
+                  height={600}
+                />
+              </div>
+              <div className="w-[100%] lg:w-[60%] h-full flex items-center justify-center">
+                <label className="text-xl text-neutral-200 font-bold">
+                  Star Rail Akademiya
+                </label>
+              </div>
+            </div>
+          </div>
+        </Link>
+        <Link
+          href={"https://genshin.akademiya.app/"}
+          className="bg-[url('/games/genshin.webp')] bg-center bg-cover bg-no-repeat h-40 w-[100%] lg:w-[33%] lg:hover:w-[100%] transition-all duration-200 cursor-pointer rounded-md lg:rounded-none"
+          onMouseEnter={() => handleHover(1)}
+          onMouseLeave={handleHoverOut}
+        >
+          <div
+            className={`bg-background/70 h-full w-full rounded-md lg:rounded-none`}
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+            <div
+              className={`flex h-full relative transition-opacity duration-200 ${
+                hoveredImage !== null && hoveredImage !== 1
+                  ? "opacity-0"
+                  : "opacity-100"
+              }`}
+            >
+              <div className="hidden lg:block lg:w-[40%] absolute bottom-0 right-0">
+                <Image
+                  src={"/games/furina.webp"}
+                  alt="Genshin Akademiya showcase image"
+                  width={600}
+                  height={600}
+                />
+              </div>
+              <div className="w-[100%] lg:w-[60%] h-full flex items-center justify-center ">
+                <label className="text-xl text-neutral-200 font-bold">
+                  Genshin Akademiya
+                </label>
+              </div>
+            </div>
+          </div>
+        </Link>
+        <Link
+          href={"/"}
+          className="bg-[url('/games/wuwa.webp')] bg-center bg-cover bg-no-repeat h-40 w-[100%] lg:w-[33%] lg:hover:w-[100%] transition-all duration-200 cursor-pointer rounded-md lg:rounded-l-none lg:rounded-r-md"
+          onMouseEnter={() => handleHover(2)}
+          onMouseLeave={handleHoverOut}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <div
+            className={`bg-background/70 h-full w-full rounded-md lg:rounded-l-none lg:rounded-r-md`}
+          >
+            <div
+              className={`flex h-full  relative transition-opacity duration-200 ${
+                hoveredImage !== null && hoveredImage !== 2
+                  ? "opacity-0"
+                  : "opacity-100"
+              }`}
+            >
+              <div className="hidden lg:block lg:w-[40%] absolute bottom-0  lg:right-0">
+                <Image
+                  src={"/games/changli.webp"}
+                  alt="WuWa Akademiya showcase image"
+                  width={600}
+                  height={600}
+                />
+              </div>
+              <div className="w-[100%] lg:w-[60%] h-full flex items-center justify-center ">
+                <label className="text-xl text-neutral-200 font-bold">
+                  WuWa Akademiya
+                </label>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
     </div>
   );
 }
