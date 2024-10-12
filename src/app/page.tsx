@@ -82,7 +82,7 @@ export default function GamesPage() {
           </div>
         </Link>
         <Link
-          href={"/"}
+          href={"https://wuwa.akademiya.app/"}
           className="bg-[url('/games/wuwa.webp')] bg-center bg-cover bg-no-repeat h-40 w-[100%] lg:w-[33%] lg:hover:w-[100%] transition-all duration-200 cursor-pointer rounded-md lg:rounded-l-none lg:rounded-r-md"
           onMouseEnter={() => handleHover(2)}
           onMouseLeave={handleHoverOut}
